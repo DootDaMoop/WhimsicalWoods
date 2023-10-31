@@ -11,9 +11,23 @@ public class CameraManager : MonoBehaviour
         target = GameObject.FindWithTag("Player");
     }
 
-    void Update() {
-        // Follows target (Player)
-        Vector3 pos = new Vector3(target.transform.position.x,target.transform.position.y,-10f);
-        transform.position = Vector3.Slerp(transform.position,pos,cameraSpeed*Time.deltaTime);
+    void FixedUpdate() {
+        // Checks if target was initalized
+        if(target == null) {
+            target = GameObject.FindWithTag("Player");
+        }
+        else{
+            // Follows target (Player)
+            Vector3 pos = new Vector3(target.transform.position.x,target.transform.position.y,-10f);
+            transform.position = Vector3.Slerp(transform.position,pos,cameraSpeed*Time.deltaTime);  
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            cameraSpeed = 5f;
+        }
+        else {
+            cameraSpeed = 2f;
+        }
+        
     }
 }

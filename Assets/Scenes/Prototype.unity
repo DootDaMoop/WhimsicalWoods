@@ -185,7 +185,7 @@ Camera:
   far clip plane: 1000
   field of view: 10
   orthographic: 1
-  orthographic size: 7.4100876
+  orthographic size: 10.22
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -313,9 +313,9 @@ MonoBehaviour:
   dungeonHeight: 140
   offset: 4
   randomWalkRooms: 1
-  playerPrefab: {fileID: 1070008770362190009, guid: 823ed30a83d3748a78ea5b05b2c58652, type: 3}
+  playerPrefab: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
   exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
-  enemyPrefab: {fileID: 9013027796928131193, guid: 75667c57e983442c2bb854df631a2053, type: 3}
+  enemyPrefab: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
   exitPosition: {x: 140, y: 140}
 --- !u!4 &1151485408
 Transform:
