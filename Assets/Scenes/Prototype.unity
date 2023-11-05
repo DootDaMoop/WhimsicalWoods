@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArcticTilemapVisualizer
       objectReference: {fileID: 0}
+    - target: {fileID: 6234267934440069225, guid: 3cc95765d99f94d0f83157097379d7b0, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7238930106756853899, guid: 3cc95765d99f94d0f83157097379d7b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -353,6 +357,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSpeed: 2
+--- !u!1 &428849278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 428849279}
+  - component: {fileID: 428849280}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &428849279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428849278}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 85.47181, y: 56.535847, z: -1.461993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &428849280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428849278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d75da60fccb4d2f8c78374ca7073df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &709312580
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +458,7 @@ GameObject:
   - component: {fileID: 1104546055}
   - component: {fileID: 1104546054}
   m_Layer: 0
-  m_Name: RoomsFirstDungeonGenerator
+  m_Name: ForestDungeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7349ff1a761c474b9fcaf52da55bf12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemapVisualizer: {fileID: 223239307}
+  tilemapVisualizer: {fileID: 2072839850}
   startPosition: {x: 0, y: 0}
   randomWalkParameters: {fileID: 11400000, guid: ed58e9b5cc90cfa4c8029a69a7f0f788, type: 2}
   minRoomWidth: 20
@@ -437,6 +485,7 @@ MonoBehaviour:
   dungeonHeight: 140
   offset: 4
   randomWalkRooms: 1
+  numLevels: 3
   playerPrefab: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
   exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
   enemyPrefab: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
@@ -42582,6 +42631,122 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &1725523734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1725523736}
+  - component: {fileID: 1725523735}
+  m_Layer: 0
+  m_Name: JungleDungeon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1725523735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725523734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7349ff1a761c474b9fcaf52da55bf12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemapVisualizer: {fileID: 223239307}
+  startPosition: {x: 0, y: 0}
+  randomWalkParameters: {fileID: 11400000, guid: ed58e9b5cc90cfa4c8029a69a7f0f788, type: 2}
+  minRoomWidth: 20
+  minRoomHeight: 20
+  dungeonWidth: 140
+  dungeonHeight: 140
+  offset: 4
+  randomWalkRooms: 1
+  numLevels: 3
+  playerPrefab: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
+  enemyPrefab: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
+  exitPosition: {x: 140, y: 140}
+--- !u!4 &1725523736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725523734}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1732787315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1732787317}
+  - component: {fileID: 1732787316}
+  m_Layer: 0
+  m_Name: ArcticDungeon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1732787316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732787315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7349ff1a761c474b9fcaf52da55bf12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemapVisualizer: {fileID: 2024096668}
+  startPosition: {x: 0, y: 0}
+  randomWalkParameters: {fileID: 11400000, guid: ed58e9b5cc90cfa4c8029a69a7f0f788, type: 2}
+  minRoomWidth: 20
+  minRoomHeight: 20
+  dungeonWidth: 140
+  dungeonHeight: 140
+  offset: 4
+  randomWalkRooms: 1
+  numLevels: 3
+  playerPrefab: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
+  enemyPrefab: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
+  exitPosition: {x: 140, y: 140}
+--- !u!4 &1732787317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732787315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1844396722
 GameObject:
   m_ObjectHideFlags: 0
@@ -42650,6 +42815,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2024096668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7918686481129485667, guid: 3cc95765d99f94d0f83157097379d7b0, type: 3}
+  m_PrefabInstance: {fileID: 151084213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef1c210db2a15144b6c93da1d060da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2072839850 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7918686481129485667, guid: 3cc95765d99f94d0f83157097379d7b0, type: 3}
+  m_PrefabInstance: {fileID: 2730447907424081188}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef1c210db2a15144b6c93da1d060da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2730447907424081188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42726,3 +42913,6 @@ SceneRoots:
   - {fileID: 151084213}
   - {fileID: 1581566263}
   - {fileID: 1104546055}
+  - {fileID: 1732787317}
+  - {fileID: 1725523736}
+  - {fileID: 428849279}

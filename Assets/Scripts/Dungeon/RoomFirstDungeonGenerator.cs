@@ -16,7 +16,11 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     [SerializeField]
     private bool randomWalkRooms = false;
 
+    [SerializeField]
+    private int numLevels = 1;
     public static bool newLevel;
+    private int currentLevel = 0;
+    public static bool biomeComplete = false;
 
     // // Add this method
     // public void GenerateNewDungeon()
@@ -27,24 +31,41 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     {
         if (newLevel)
         {
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                Destroy(enemy);
+            if (currentLevel < numLevels) {
+                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+                {
+                    Destroy(enemy);
+                }
+                foreach (GameObject exit in GameObject.FindGameObjectsWithTag("Finish"))
+                {
+                    Destroy(exit);
+                }
+                foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+                {
+                    Destroy(player);
+                }
+                RunProceduralGeneration();
+            } else {
+                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+                {
+                    Destroy(enemy);
+                }
+                foreach (GameObject exit in GameObject.FindGameObjectsWithTag("Finish"))
+                {
+                    Destroy(exit);
+                }
+                foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+                {
+                    Destroy(player);
+                }
+                biomeComplete = true;
             }
-            foreach (GameObject exit in GameObject.FindGameObjectsWithTag("Finish"))
-            {
-                Destroy(exit);
-            }
-            foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-            {
-                Destroy(player);
-            }
-            RunProceduralGeneration();
+            
         }
     }
 
     // added this method so that the dungeon would be generated when the game starts
-    private void Awake()
+    private void Start()
     {
         RunProceduralGeneration();
     }
@@ -52,6 +73,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     protected override void RunProceduralGeneration()
     {
         newLevel = false;
+        currentLevel++;
         CreateRooms();
     }
 
