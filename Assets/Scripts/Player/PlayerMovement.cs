@@ -5,58 +5,43 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Adjust the speed as needed
+    [SerializeField] private float moveSpeed = 5f; // Adjust the speed as needed
     private Rigidbody2D rb;
     private Animator animator;
+    private float moveX;
+    private float moveY;
+    private Vector2 movement;
+    private bool facingRight;
     public GameObject exitPrefab;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        facingRight = true;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        // Get input from the player
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
+        // Player Movement Input
+        moveX = Input.GetAxis("Horizontal");
+        moveY = Input.GetAxis("Vertical");
 
         // Calculate movement direction
-        Vector2 movement = new Vector2(moveX, moveY).normalized;
+        movement = new Vector2(moveX, moveY).normalized;
 
         // Apply movement
         rb.velocity = movement * moveSpeed;
 
-        #region Running Animations
-
-        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-            animator.SetBool("MovingHorizontal",true);
-            Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-            transform.rotation = Quaternion.Euler(rotator);
+        // Animations
+        AnimateMovement(movement);
+        if(movement.x > 0 && !facingRight) {
+            FlipOnX();
         }
-        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-            animator.SetBool("MovingHorizontal",true);
-            Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
-            transform.rotation = Quaternion.Euler(rotator);
+        if(movement.x < 0 && facingRight) {
+            FlipOnX();
         }
-        else {
-            animator.SetBool("MovingHorizontal",false);
-        }
-
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-            animator.SetBool("MovingUp",true);
-        }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-            animator.SetBool("MovingDown",true);
-        }
-        else {
-            animator.SetBool("MovingUp",false);
-            animator.SetBool("MovingDown",false);
-        }
-
-        #endregion
-
+        
         // Sprint
         if(Input.GetKey(KeyCode.LeftShift)) {
             moveSpeed = 15f;
@@ -65,4 +50,25 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 5f;
         }
     }
+
+    #region Player Movement
+    public void AnimateMovement(Vector2 movement) {
+        if(rb.velocity != Vector2.zero) {
+            animator.SetBool("isMoving", true);
+            animator.SetFloat("inputX",movement.x);
+            animator.SetFloat("inputY",movement.y);
+        }
+        else {
+            animator.SetBool("isMoving", false);
+        }
+    }
+    
+    public void FlipOnX() {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+
+        facingRight = !facingRight;
+    }
+    #endregion
 }
