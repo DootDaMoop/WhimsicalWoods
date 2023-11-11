@@ -8,6 +8,7 @@ AssetBundles/
 [Mm]ods/
 [Oo]bj/
 [Rr]elease*/
+[Uu]serSettings/
 Packages/MSTest*
 Packages/NUnit*
 # Unity3D generated meta files
