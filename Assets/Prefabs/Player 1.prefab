@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4894808029772326672
+--- !u!1 &2758426848437691091
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,21 +8,21 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3787870865495903088}
-  m_Layer: 6
-  m_Name: AttackPoint
-  m_TagString: AttackPoint
+  - component: {fileID: 3627751853018906382}
+  m_Layer: 0
+  m_Name: SwordHitBox
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3787870865495903088
+--- !u!4 &3627751853018906382
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4894808029772326672}
+  m_GameObject: {fileID: 2758426848437691091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1920418612850917940}
   - component: {fileID: 3022572521515001589}
   - component: {fileID: 7913773487823238417}
-  - component: {fileID: -3509861871923819129}
+  - component: {fileID: 1594782872940435256}
   - component: {fileID: 8396629742859105308}
   m_Layer: 0
   m_Name: Player 1
@@ -66,7 +66,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3787870865495903088}
+  - {fileID: 3627751853018906382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8998155809395602271
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: -1609713519
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1978602901, guid: c67e8bdd3ebe76143988c33f40a5fec0, type: 3}
+  m_Sprite: {fileID: 1851119020, guid: c67e8bdd3ebe76143988c33f40a5fec0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,10 +180,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0044702664, y: -0.15083429}
+  m_Offset: {x: 0, y: -0.035}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.51, y: 0.28}
     oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 0.48, y: 0.48}
     adaptiveTilingThreshold: 0.5
@@ -206,8 +206,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  swordHitbox: {fileID: 2758426848437691091}
   exitPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
---- !u!114 &-3509861871923819129
+--- !u!114 &1594782872940435256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,21 +217,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6819802551937812644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e64896370feda18448c73d8ad6afd698, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aac699330841c24e8467ae841de494d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <player>k__BackingField: {fileID: 6819802551937812644}
-  <maxHealth>k__BackingField: 100
-  <attackDamage>k__BackingField: 50
-  <attackPoint>k__BackingField: {fileID: 3787870865495903088}
-  <attackRange>k__BackingField: 0.75
-  <attackRate>k__BackingField: 2
-  <nextAttackTime>k__BackingField: 0
-  <knockbackForce>k__BackingField: 25
-  <enemy>k__BackingField: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
-  <enemyLayers>k__BackingField:
+  attackPoint: {fileID: 3627751853018906382}
+  attackDamage: 50
+  attackRange: 1
+  enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  enemy: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
 --- !u!95 &8396629742859105308
 Animator:
   serializedVersion: 5

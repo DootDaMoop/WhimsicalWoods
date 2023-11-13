@@ -30,8 +30,9 @@ public class EnemyAttackState : EnemyState
             enemy.StateMachine.ChangeState(enemy.ChaseState);
         }
 
-        Vector2 moveDirection = (player.transform.position - enemy.transform.position).normalized;
-        enemy.MoveEnemy(moveDirection * movementSpeed);
+        enemy.MoveEnemy(Vector2.zero);
+        //Vector2 moveDirection = (player.transform.position - enemy.transform.position).normalized;
+        //enemy.MoveEnemy(moveDirection * movementSpeed);
     }
 
     public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)

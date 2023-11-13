@@ -10,8 +10,11 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private float moveX;
     private float moveY;
+    private Vector3 mousePosition;
     private Vector2 movement;
+    private Vector2 mouseDirection;
     private bool facingRight;
+    [SerializeField] private GameObject swordHitbox;
     public GameObject exitPrefab;
 
     private void Start()
@@ -26,20 +29,23 @@ public class PlayerMovement : MonoBehaviour
         // Player Movement Input
         moveX = Input.GetAxis("Horizontal");
         moveY = Input.GetAxis("Vertical");
+        mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        // Calculate movement direction
+        // Calculate directions
         movement = new Vector2(moveX, moveY).normalized;
+        mouseDirection = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
 
         // Apply movement
         rb.velocity = movement * moveSpeed;
+        
 
         // Animations
-        AnimateMovement(movement);
-        if(movement.x > 0 && !facingRight) {
-            FlipOnX();
+        if(rb.velocity == Vector2.zero) {
+            AnimateIdle(mouseDirection);
         }
-        if(movement.x < 0 && facingRight) {
-            FlipOnX();
+        else {
+            AnimateMovement(movement);
         }
         
         // Sprint
@@ -53,13 +59,26 @@ public class PlayerMovement : MonoBehaviour
 
     #region Player Movement
     public void AnimateMovement(Vector2 movement) {
-        if(rb.velocity != Vector2.zero) {
-            animator.SetBool("isMoving", true);
-            animator.SetFloat("inputX",movement.x);
-            animator.SetFloat("inputY",movement.y);
+        animator.SetBool("isMoving", true);
+        animator.SetFloat("inputX",movement.x);
+        animator.SetFloat("inputY",movement.y);
+        if((movement.x > 0) && !facingRight) {
+            FlipOnX();
         }
-        else {
-            animator.SetBool("isMoving", false);
+        if((movement.x < 0) && facingRight) {
+            FlipOnX();
+        }
+    }
+
+    public void AnimateIdle(Vector2 direction) {
+        animator.SetBool("isMoving",false);
+        animator.SetFloat("inputX",direction.x);
+        animator.SetFloat("inputY",direction.y); 
+        if((mouseDirection.x > 0) && !facingRight) {
+            FlipOnX();
+        }
+        if((mouseDirection.x < 0) && facingRight) {
+            FlipOnX();
         }
     }
     
@@ -70,5 +89,15 @@ public class PlayerMovement : MonoBehaviour
 
         facingRight = !facingRight;
     }
+
     #endregion
+
+    /*private void OnDrawGizmosSelected() {
+        if (transform == null) {
+            //Debug.Log("Attack Point is null!");
+            return;
+        }
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position + (Vector3)mouseDirection, 1f);
+    }*/
 }
