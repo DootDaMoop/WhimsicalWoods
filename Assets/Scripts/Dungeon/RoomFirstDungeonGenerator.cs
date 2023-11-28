@@ -31,7 +31,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     {
         if (newLevel)
         {
-            if (currentLevel < numLevels) {
+            if (currentLevel < numLevels)
+            {
                 foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
                 {
                     Destroy(enemy);
@@ -45,7 +46,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                     Destroy(player);
                 }
                 RunProceduralGeneration();
-            } else {
+            }
+            else
+            {
                 foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
                 {
                     Destroy(enemy);
@@ -60,7 +63,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                 }
                 biomeComplete = true;
             }
-            
+
         }
     }
 
@@ -240,10 +243,14 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             if (destination.y > position.y)
             {
                 position += Vector2Int.up;
+                // Add additional tiles above and below the corridor
+                AddAdjacentTiles(position, corridor);
             }
             else if (destination.y < position.y)
             {
                 position += Vector2Int.down;
+                // Add additional tiles above and below the corridor
+                AddAdjacentTiles(position, corridor);
             }
             corridor.Add(position);
         }
@@ -252,14 +259,50 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             if (destination.x > position.x)
             {
                 position += Vector2Int.right;
+                // Add additional tiles to the right and left of the corridor
+                AddAdjacentTiles(position, corridor);
             }
             else if (destination.x < position.x)
             {
                 position += Vector2Int.left;
+                // Add additional tiles to the right and left of the corridor
+                AddAdjacentTiles(position, corridor);
             }
             corridor.Add(position);
         }
         return corridor;
+    }
+
+    private void AddAdjacentTiles(Vector2Int position, HashSet<Vector2Int> corridor)
+    {
+        for (int i = 1; i < 2; i++)
+        {
+            Vector2Int adjacentTile = position + Vector2Int.right * i;
+            if (!corridor.Contains(adjacentTile))
+            {
+                corridor.Add(adjacentTile);
+            }
+
+            adjacentTile = position + Vector2Int.left * i;
+            if (!corridor.Contains(adjacentTile))
+            {
+                corridor.Add(adjacentTile);
+            }
+        }
+        for (int i = 1; i < 2; i++)
+        {
+            Vector2Int adjacentTile = position + Vector2Int.up * i;
+            if (!corridor.Contains(adjacentTile))
+            {
+                corridor.Add(adjacentTile);
+            }
+
+            adjacentTile = position + Vector2Int.down * i;
+            if (!corridor.Contains(adjacentTile))
+            {
+                corridor.Add(adjacentTile);
+            }
+        }
     }
 
     private Vector2Int FindClosestPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCenters)
