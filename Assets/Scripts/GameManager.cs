@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,6 +46,9 @@ public class GameManager : MonoBehaviour
                 arctic.SetActive(false);
                 jungle.SetActive(true);
                 RoomFirstDungeonGenerator.biomeComplete = false;
+            } else if (jungle.activeSelf) {
+                Debug.Log("jungle biome complete");
+                SceneManager.LoadScene("Boss");
             }
                 
         }
