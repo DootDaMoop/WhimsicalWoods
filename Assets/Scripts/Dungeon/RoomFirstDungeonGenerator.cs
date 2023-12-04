@@ -22,6 +22,12 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     private int currentLevel = 0;
     public static bool biomeComplete = false;
 
+     public GameObject[] characterPrefabs;
+    // public GameObject playerPrefab;
+    public GameObject exitDoorPrefab;
+    public GameObject enemyPrefab;
+    public Vector2Int exitPosition;
+
     // // Add this method
     // public void GenerateNewDungeon()
     // {
@@ -79,12 +85,6 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         currentLevel++;
         CreateRooms();
     }
-
-    public GameObject playerPrefab;
-    public GameObject exitDoorPrefab;
-    public GameObject enemyPrefab;
-    public Vector2Int exitPosition;
-
 
     private void CreateRooms()
     {
@@ -182,6 +182,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         // Instantiate player prefab in the start room
         Vector3 playerSpawnPosition = new Vector3(mostLowerLeft.x, mostLowerLeft.y, 0); // Convert Vector2Int to Vector3 with Z set to 0
         // Debug.Log("Player: " + playerSpawnPosition);
+        int selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
+        GameObject playerPrefab = characterPrefabs[selectedCharacter];
         Instantiate(playerPrefab, playerSpawnPosition, Quaternion.identity);
 
 

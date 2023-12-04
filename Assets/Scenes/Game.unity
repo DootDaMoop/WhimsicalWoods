@@ -486,7 +486,10 @@ MonoBehaviour:
   offset: 4
   randomWalkRooms: 1
   numLevels: 3
-  playerPrefab: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  characterPrefabs:
+  - {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  - {fileID: 152844164089894558, guid: e50131c9f9a15431fa1303b1e8d51a05, type: 3}
+  - {fileID: 4845057303926841484, guid: 09263f7131d374ca5a8449929055912c, type: 3}
   exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
   enemyPrefab: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
   exitPosition: {x: 140, y: 140}
@@ -42670,7 +42673,10 @@ MonoBehaviour:
   offset: 4
   randomWalkRooms: 1
   numLevels: 3
-  playerPrefab: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  characterPrefabs:
+  - {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  - {fileID: 152844164089894558, guid: e50131c9f9a15431fa1303b1e8d51a05, type: 3}
+  - {fileID: 4845057303926841484, guid: 09263f7131d374ca5a8449929055912c, type: 3}
   exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
   enemyPrefab: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
   exitPosition: {x: 140, y: 140}
@@ -42728,7 +42734,10 @@ MonoBehaviour:
   offset: 4
   randomWalkRooms: 1
   numLevels: 3
-  playerPrefab: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  characterPrefabs:
+  - {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
+  - {fileID: 152844164089894558, guid: e50131c9f9a15431fa1303b1e8d51a05, type: 3}
+  - {fileID: 4845057303926841484, guid: 09263f7131d374ca5a8449929055912c, type: 3}
   exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
   enemyPrefab: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
   exitPosition: {x: 140, y: 140}
