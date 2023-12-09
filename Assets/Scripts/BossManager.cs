@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossManager : MonoBehaviour
 {
     public GameObject[] characterPrefabs;
     public GameObject enemyPrefab;
+    public int currentHealth;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,11 +16,15 @@ public class BossManager : MonoBehaviour
         int selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
         GameObject playerPrefab = characterPrefabs[selectedCharacter];
         Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+
+        currentHealth = PlayerPrefs.GetInt("currentHealth");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (PlayerPrefs.GetInt("currentHealth") <= 0) {
+            SceneManager.LoadScene("Lose", LoadSceneMode.Single);
+        }
     }
 }

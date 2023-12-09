@@ -38,51 +38,62 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply movement
         rb.velocity = movement * moveSpeed;
-        
+
 
         // Animations
-        if(rb.velocity == Vector2.zero) {
+        if (rb.velocity == Vector2.zero)
+        {
             AnimateIdle(mouseDirection);
         }
-        else {
+        else
+        {
             AnimateMovement(movement);
         }
-        
+
         // Sprint
-        if(Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
             moveSpeed = 15f;
         }
-        else {
+        else
+        {
             moveSpeed = 5f;
         }
     }
 
     #region Player Movement
-    public void AnimateMovement(Vector2 movement) {
+    public void AnimateMovement(Vector2 movement)
+    {
         animator.SetBool("isMoving", true);
-        animator.SetFloat("inputX",movement.x);
-        animator.SetFloat("inputY",movement.y);
-        if((movement.x > 0) && !facingRight) {
+        animator.SetFloat("inputX", movement.x);
+        animator.SetFloat("inputY", movement.y);
+        if ((movement.x > 0) && !facingRight)
+        {
             FlipOnX();
         }
-        if((movement.x < 0) && facingRight) {
+        if ((movement.x < 0) && facingRight)
+        {
             FlipOnX();
         }
     }
 
-    public void AnimateIdle(Vector2 direction) {
-        animator.SetBool("isMoving",false);
-        animator.SetFloat("inputX",direction.x);
-        animator.SetFloat("inputY",direction.y); 
-        if((mouseDirection.x > 0) && !facingRight) {
+    public void AnimateIdle(Vector2 direction)
+    {
+        animator.SetBool("isMoving", false);
+        animator.SetFloat("inputX", direction.x);
+        animator.SetFloat("inputY", direction.y);
+        if ((mouseDirection.x > 0) && !facingRight)
+        {
             FlipOnX();
         }
-        if((mouseDirection.x < 0) && facingRight) {
+        if ((mouseDirection.x < 0) && facingRight)
+        {
             FlipOnX();
         }
     }
-    
-    public void FlipOnX() {
+
+    public void FlipOnX()
+    {
         Vector3 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;

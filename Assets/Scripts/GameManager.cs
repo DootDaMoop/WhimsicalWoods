@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     GameObject arctic;
     GameObject jungle;
 
+    public int currentHealth = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +21,35 @@ public class GameManager : MonoBehaviour
         forest.SetActive(true);
         arctic.SetActive(false);
         jungle.SetActive(false);
+
+        PlayerPrefs.SetInt("currentHealth", currentHealth);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        // // testing hb ui
+        // if (Input.GetKeyDown(KeyCode.Minus))
+        // {
+        //     int currentHealth = PlayerPrefs.GetInt("currentHealth");
+        //     currentHealth -= 10;
+        //     PlayerPrefs.SetInt("currentHealth", currentHealth);
+        //     // TakeDamage(10);
+        //     Debug.Log("Current Health: " + currentHealth);
+        // }
+        // else if (Input.GetKeyDown(KeyCode.Equals))
+        // {
+        //     int currentHealth = PlayerPrefs.GetInt("currentHealth");
+        //     currentHealth += 10;
+        //     PlayerPrefs.SetInt("currentHealth", currentHealth);
+        //     // TakeDamage(-10);
+        //     Debug.Log("Current Health: " + currentHealth);
+        // }
+        if (PlayerPrefs.GetInt("currentHealth") <= 0) {
+            SceneManager.LoadScene("Lose", LoadSceneMode.Single);
+        }
+
         // if (forest.activeSelf == false) {
         //     if (forest.biomeComplete == true) {
         //     Debug.Log("forest biome complete");
@@ -48,7 +74,7 @@ public class GameManager : MonoBehaviour
                 RoomFirstDungeonGenerator.biomeComplete = false;
             } else if (jungle.activeSelf) {
                 Debug.Log("jungle biome complete");
-                SceneManager.LoadScene("Boss");
+                SceneManager.LoadScene("Boss", LoadSceneMode.Single);
             }
                 
         }
