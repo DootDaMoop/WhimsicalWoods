@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1694968334268909900
+--- !u!1 &3205689738011914591
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6592415147261592849}
-  - component: {fileID: 4806614966418493419}
-  - component: {fileID: 4298909205379925932}
-  - component: {fileID: -3686579067378997496}
-  - component: {fileID: 7114990413364262873}
-  - component: {fileID: -462309107055354053}
+  - component: {fileID: 8023638773320720974}
+  - component: {fileID: 4777260290269886387}
+  - component: {fileID: 7773618078751320084}
+  - component: {fileID: 7533966737671881817}
+  - component: {fileID: 3208866876758340769}
+  - component: {fileID: 5193390091772513746}
   m_Layer: 6
-  m_Name: Slime
+  m_Name: Jaguar
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6592415147261592849
+--- !u!4 &8023638773320720974
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694968334268909900}
+  m_GameObject: {fileID: 3205689738011914591}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -36,13 +36,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4806614966418493419
+--- !u!212 &4777260290269886387
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694968334268909900}
+  m_GameObject: {fileID: 3205689738011914591}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1783441113, guid: a50cf016dade4ec40a6890ae01a2982e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.49056602, g: 0.1827599, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,13 +88,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4298909205379925932
+--- !u!61 &7773618078751320084
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694968334268909900}
+  m_GameObject: {fileID: 3205689738011914591}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -133,14 +133,14 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13320616, y: 0.11067824}
   m_EdgeRadius: 0
---- !u!50 &-3686579067378997496
+--- !u!50 &7533966737671881817
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694968334268909900}
+  m_GameObject: {fileID: 3205689738011914591}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
@@ -160,13 +160,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &7114990413364262873
+--- !u!114 &3208866876758340769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694968334268909900}
+  m_GameObject: {fileID: 3205689738011914591}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2b42140e47c3d74581e77ece7d918f0, type: 3}
@@ -177,14 +177,14 @@ MonoBehaviour:
   isHit: 0
   randomMovementRange: 5
   randomMovementSpeed: 1
---- !u!95 &-462309107055354053
+--- !u!95 &5193390091772513746
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694968334268909900}
+  m_GameObject: {fileID: 3205689738011914591}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: fd16a2a6498092c4daeb6161f0baad85, type: 2}

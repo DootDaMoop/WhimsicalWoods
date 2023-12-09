@@ -7,7 +7,7 @@ public class BossManager : MonoBehaviour
 {
     public GameObject[] characterPrefabs;
     public GameObject enemyPrefab;
-    public int currentHealth;
+    // public int currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class BossManager : MonoBehaviour
         GameObject playerPrefab = characterPrefabs[selectedCharacter];
         Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
-        currentHealth = PlayerPrefs.GetInt("currentHealth");
+        int currentHealth = PlayerPrefs.GetInt("currentHealth");
     }
 
     // Update is called once per frame
