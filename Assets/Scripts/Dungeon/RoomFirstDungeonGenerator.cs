@@ -26,7 +26,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
      public GameObject[] characterPrefabs;
     // public GameObject playerPrefab;
     public GameObject exitDoorPrefab;
-    public GameObject enemyPrefab;
+
+    public GameObject[] enemyPrefabs;
+    // public GameObject enemyPrefab;
     public Vector2Int exitPosition;
 
     // // Add this method
@@ -140,12 +142,14 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         Debug.Log("List Size: " + enemyRooms.Count);
         foreach (var center in enemyRooms)
         {
-            // Determine the random number of enemies to generate within the range of 1 to 5
+            // Determine the random number and type of enemies to generate within the range of 1 to 5
             int numberOfEnemies = Random.Range(1, 5);
+            GameObject enemyPrefab = enemyPrefabs[(numberOfEnemies + 1) % enemyPrefabs.Length];
 
             // Generate the specified number of enemies around the center
             for (int i = 0; i < numberOfEnemies; i++)
             {
+                
                 // Variables to store the spawn position
                 Vector3 enemySpawnPosition = Vector3.zero;
                 bool positionFound = false;
