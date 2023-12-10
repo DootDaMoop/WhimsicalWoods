@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         jungle.SetActive(false);
 
         PlayerPrefs.SetInt("currentHealth", currentHealth);
+        PlayerPrefs.SetInt("boss", 0);
         
     }
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
                 RoomFirstDungeonGenerator.biomeComplete = false;
             } else if (jungle.activeSelf) {
                 Debug.Log("jungle biome complete");
+                PlayerPrefs.SetInt("boss", 1);
                 SceneManager.LoadScene("Boss", LoadSceneMode.Single);
             }
                 
