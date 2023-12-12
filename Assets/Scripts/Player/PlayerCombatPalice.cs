@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMelee : MonoBehaviour
+public class PlayerCombatPalice : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackDamage;
@@ -14,12 +14,10 @@ public class PlayerMelee : MonoBehaviour
     [SerializeField] private GameObject enemy;
     private Rigidbody2D rb;
     private Animator animator;
-    private bool startKnockback;
     private Vector3 mousePosition;
     private Vector2 mouseDirection;
 
     private void Start() {
-        startKnockback = false;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -51,14 +49,6 @@ public class PlayerMelee : MonoBehaviour
         
     }
 
-    public void FireKnockBack(Enemy enemy) {
-        Vector2 direction = (transform.position - enemy.transform.position).normalized;
-        Vector2 knockback = direction * 100f;
-        enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        enemy.GetComponent<Rigidbody2D>().AddForce(knockback,ForceMode2D.Impulse);
-        startKnockback = false;
-    }
-
     void PlayerAttack() {
         animator.SetTrigger("Attack");
 
@@ -70,9 +60,14 @@ public class PlayerMelee : MonoBehaviour
             }
             else{
                 Debug.Log("Hit!");
-                enemy.GetComponent<Enemy>().Damage(attackDamage);
+                Vector2 knockbackDirection = CalculateKnockbackDirection(enemy);
+                enemy.GetComponent<EnemyEnum>().Damage(attackDamage, knockbackDirection);
             }
         }
+    }
+
+    private Vector2 CalculateKnockbackDirection(Collider2D enemyCollider) {
+        return (enemyCollider.transform.position - transform.position).normalized;
     }
 
     private void OnDrawGizmosSelected() {

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4806614966418493419}
   - component: {fileID: 4298909205379925932}
   - component: {fileID: -3686579067378997496}
-  - component: {fileID: 7114990413364262873}
   - component: {fileID: -462309107055354053}
+  - component: {fileID: 8026336053854550345}
   m_Layer: 6
   m_Name: Squirrel
   m_TagString: Enemy
@@ -160,23 +160,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &7114990413364262873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694968334268909900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2b42140e47c3d74581e77ece7d918f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <maxHealth>k__BackingField: 100
-  player: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
-  isHit: 0
-  randomMovementRange: 5
-  randomMovementSpeed: 1
 --- !u!95 &-462309107055354053
 Animator:
   serializedVersion: 5
@@ -198,3 +181,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8026336053854550345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694968334268909900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab00e889c2cab234db41c8060a54e5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  attackDamage: 20
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  player: {fileID: 0}
+  isFacingRight: 0
+  isRanged: 1
+  aggroRadius: 8
+  attackRadius: 7
+  movementSpeed: 1.75
+  nextAttackTime: 0
+  attackCooldown: 1
+  projectilePrefab: {fileID: 5665352364310876827, guid: 259cce2f14e9cdb4f92499b9bab6212b, type: 3}
+  randomMovementRange: 5
+  randomMovementSpeed: 1
+  knockbackForce: 5

@@ -1,11 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f; // Adjust the speed as needed
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float knockbackForce;
+    public GameObject enemy;
+    private bool isHit;
     private Rigidbody2D rb;
     private Animator animator;
     private float moveX;
@@ -19,9 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        isHit = false;
+        currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         facingRight = true;
+        knockbackForce = 5f;
     }
 
     private void FixedUpdate()
@@ -41,22 +49,18 @@ public class PlayerMovement : MonoBehaviour
 
 
         // Animations
-        if (rb.velocity == Vector2.zero)
-        {
+        if (rb.velocity == Vector2.zero) {
             AnimateIdle(mouseDirection);
         }
-        else
-        {
+        else {
             AnimateMovement(movement);
         }
 
         // Sprint
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
+        if (Input.GetKey(KeyCode.LeftShift)) {
             moveSpeed = 15f;
         }
-        else
-        {
+        else {
             moveSpeed = 5f;
         }
     }
@@ -102,6 +106,68 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+
+    #region Player Damage
+
+    public void TakeDamage(float damageAmount) {
+        isHit = false;
+        currentHealth -= damageAmount;
+        Debug.Log($"Current Health: {currentHealth}");
+
+        if(currentHealth <= 0) {
+            PlayerDeath();
+        }
+    }
+
+    public void PlayerKnockback(Vector2 knockbackDirection) {
+        StartCoroutine(KnockbackPlayer(knockbackDirection));
+    }
+
+    private IEnumerator KnockbackPlayer(Vector2 direction) {
+        float duration = 0.5f;
+        float startTime = Time.time;
+
+        while(Time.time < startTime + duration) {
+            transform.position += (Vector3)direction * (knockbackForce / duration) * Time.deltaTime;
+            enemy.GetComponent<EnemyEnum>().rb.velocity = Vector2.zero;
+            yield return null;
+        }
+    }
+
+    private void PlayerDeath() {
+        animator.SetBool("isDead", true);
+        StartCoroutine(DestroyAfterAnimation());
+    }
+
+    IEnumerator DestroyAfterAnimation() {
+        animator.SetBool("isDead",true);
+
+        // Verifies death animation is playing
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("character_death")) {
+            yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+            GetComponent<PlayerMovement>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            if(GetComponent<PlayerCombatCapybara>() != null) {
+                GetComponent<PlayerCombatCapybara>().enabled = false;
+            }
+            else if(GetComponent<PlayerCombatQuokka>() != null) {
+                GetComponent<PlayerCombatQuokka>().enabled = false;
+            }
+        }
+        // if not, wait for current animation to end and recurse Death()
+        else {
+            yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
+            PlayerDeath();
+        }
+    }
+
+    #endregion
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.CompareTag("Enemy")) {
+            isHit = true;
+        }
+    }
 
     /*private void OnDrawGizmosSelected() {
         if (transform == null) {

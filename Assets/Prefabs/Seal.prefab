@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 202609633923432798}
   - component: {fileID: 184535233135100185}
   - component: {fileID: 7439742913811821963}
-  - component: {fileID: 4883277434216408220}
   - component: {fileID: 4265533120004328133}
+  - component: {fileID: 5945220263181274203}
   m_Layer: 6
   m_Name: Seal
   m_TagString: Enemy
@@ -160,23 +160,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4883277434216408220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280609687023899270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2b42140e47c3d74581e77ece7d918f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <maxHealth>k__BackingField: 100
-  player: {fileID: 6819802551937812644, guid: fcb05a74ba549324098a13faf68c8481, type: 3}
-  isHit: 0
-  randomMovementRange: 5
-  randomMovementSpeed: 1
 --- !u!95 &4265533120004328133
 Animator:
   serializedVersion: 5
@@ -198,3 +181,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5945220263181274203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280609687023899270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab00e889c2cab234db41c8060a54e5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  attackDamage: 10
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  player: {fileID: 0}
+  isFacingRight: 0
+  aggroRadius: 8
+  attackRadius: 3
+  movementSpeed: 1.75
+  randomMovementRange: 5
+  randomMovementSpeed: 1
+  knockbackForce: 0

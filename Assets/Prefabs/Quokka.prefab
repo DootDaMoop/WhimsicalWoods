@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 5041093369192341987}
   - component: {fileID: 2736120953346595259}
   - component: {fileID: 5177912511433315487}
-  - component: {fileID: 3651572587083161028}
   - component: {fileID: 6267836393230244305}
   - component: {fileID: 6767561143705222090}
+  - component: {fileID: -3740478258322036523}
   m_Layer: 0
   m_Name: Quokka
   m_TagString: Player
@@ -148,7 +148,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2736120953346595259
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -207,28 +207,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  maxHealth: 100
+  currentHealth: 0
+  knockbackForce: 0
+  enemy: {fileID: 0}
   swordHitbox: {fileID: 1537952368870216596}
   exitPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
---- !u!114 &3651572587083161028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4845057303926841484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aac699330841c24e8467ae841de494d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPoint: {fileID: 8869437241140773647}
-  attackDamage: 50
-  attackRange: 1
-  attackCooldown: 1
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  enemy: {fileID: 1694968334268909900, guid: 374762dd3f1fc1f49a68d003f300139f, type: 3}
 --- !u!95 &6267836393230244305
 Animator:
   serializedVersion: 5
@@ -262,3 +246,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428b23d2d8812459aadf6cb8a674bae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3740478258322036523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845057303926841484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af4b996b5a6e3745a0bdb4f99b35f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 8869437241140773647}
+  projectilePrefab: {fileID: 5665352364310876827, guid: f25f35d71547f0b448b97ea190200431, type: 3}
+  attackDamage: 20
+  attackCooldown: 1
+  attackSpeed: 0
