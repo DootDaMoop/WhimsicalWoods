@@ -176,6 +176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  maxHealth: 100
+  currentHealth: 0
+  knockbackForce: 0
+  enemy: {fileID: 0}
   swordHitbox: {fileID: 3092261578505202214}
   exitPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
 --- !u!114 &4384242580348303414
@@ -226,7 +230,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152844164089894558}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 428b23d2d8812459aadf6cb8a674bae2, type: 3}
   m_Name: 
