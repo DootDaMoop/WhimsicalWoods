@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f; // Adjust the speed as needed
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float currentHealth;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int currentHealth;
     [SerializeField] private float knockbackForce;
     public GameObject enemy;
     private bool isHit;
@@ -25,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     {
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         isHit = false;
-        currentHealth = maxHealth;
+        currentHealth = PlayerPrefs.GetInt("currentHealth");
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         facingRight = true;
@@ -111,11 +113,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(float damageAmount) {
         isHit = false;
-        currentHealth -= damageAmount;
+        // currentHealth -= damageAmount;
+        currentHealth = PlayerPrefs.GetInt("currentHealth");
+        currentHealth -= (int)damageAmount;
+        PlayerPrefs.SetInt("currentHealth", currentHealth);
         Debug.Log($"Current Health: {currentHealth}");
 
         if(currentHealth <= 0) {
             PlayerDeath();
+            SceneManager.LoadScene("Lose", LoadSceneMode.Single);
         }
     }
 

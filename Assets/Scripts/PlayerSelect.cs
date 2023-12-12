@@ -50,6 +50,7 @@ public class PlayerSelect : MonoBehaviour
     public void StartGame()
     {
         PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
+        PlayerPrefs.SetInt("currentHealth", 100);
         // string sceneName = "Game";
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
         // SceneManager.LoadScene(1, LoadSceneMode.Single);

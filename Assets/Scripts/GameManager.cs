@@ -67,15 +67,18 @@ public class GameManager : MonoBehaviour
                 arctic.SetActive(true);
                 jungle.SetActive(false);
                 RoomFirstDungeonGenerator.biomeComplete = false;
+                PlayerPrefs.SetInt("currentHealth", currentHealth);
             } else if (arctic.activeSelf) {
                 Debug.Log("arctic biome complete");
                 forest.SetActive(false);
                 arctic.SetActive(false);
                 jungle.SetActive(true);
                 RoomFirstDungeonGenerator.biomeComplete = false;
+                PlayerPrefs.SetInt("currentHealth", currentHealth);
             } else if (jungle.activeSelf) {
                 Debug.Log("jungle biome complete");
                 PlayerPrefs.SetInt("boss", 1);
+                PlayerPrefs.SetInt("currentHealth", currentHealth);
                 SceneManager.LoadScene("Boss", LoadSceneMode.Single);
             }
                 
