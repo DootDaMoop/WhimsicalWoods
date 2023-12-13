@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 2736120953346595259}
   - component: {fileID: 5177912511433315487}
   - component: {fileID: 6267836393230244305}
-  - component: {fileID: 6767561143705222090}
   - component: {fileID: -3740478258322036523}
   m_Layer: 0
   m_Name: Quokka
@@ -236,18 +235,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6767561143705222090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4845057303926841484}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 428b23d2d8812459aadf6cb8a674bae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3740478258322036523
 MonoBehaviour:
   m_ObjectHideFlags: 0
