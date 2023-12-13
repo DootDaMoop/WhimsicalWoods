@@ -19,9 +19,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 mousePosition;
     private Vector2 movement;
     private Vector2 mouseDirection;
-    private bool facingRight;
+    //private bool facingRight;
     [SerializeField] private GameObject swordHitbox;
     public GameObject exitPrefab;
+    public SpriteRenderer spriteRenderer;
+    public PolygonCollider2D polygonCollider;
 
     private void Start()
     {
@@ -30,8 +32,10 @@ public class PlayerMovement : MonoBehaviour
         currentHealth = PlayerPrefs.GetInt("currentHealth");
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        facingRight = true;
+        //facingRight = true;
         knockbackForce = 5f;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        polygonCollider = GetComponent<PolygonCollider2D>();
     }
 
     private void FixedUpdate()
@@ -49,6 +53,9 @@ public class PlayerMovement : MonoBehaviour
         // Apply movement
         rb.velocity = movement * moveSpeed;
 
+        // Collider Updates
+        Vector2[] spriteVertices = spriteRenderer.sprite.vertices;
+        polygonCollider.SetPath(0, spriteVertices);
 
         // Animations
         if (rb.velocity == Vector2.zero) {
@@ -73,14 +80,14 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isMoving", true);
         animator.SetFloat("inputX", movement.x);
         animator.SetFloat("inputY", movement.y);
-        if ((movement.x > 0) && !facingRight)
+        /*if ((movement.x > 0) && !facingRight)
         {
             FlipOnX();
         }
         if ((movement.x < 0) && facingRight)
         {
             FlipOnX();
-        }
+        }*/
     }
 
     public void AnimateIdle(Vector2 direction)
@@ -88,24 +95,24 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isMoving", false);
         animator.SetFloat("inputX", direction.x);
         animator.SetFloat("inputY", direction.y);
-        if ((mouseDirection.x > 0) && !facingRight)
+        /*if ((mouseDirection.x > 0) && !facingRight)
         {
             FlipOnX();
         }
         if ((mouseDirection.x < 0) && facingRight)
         {
             FlipOnX();
-        }
+        }*/
     }
 
-    public void FlipOnX()
+    /*public void FlipOnX()
     {
         Vector3 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;
 
         facingRight = !facingRight;
-    }
+    }*/
 
     #endregion
 

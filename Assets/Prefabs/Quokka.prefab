@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 4845057303926841484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: 1.19, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -213,6 +213,8 @@ MonoBehaviour:
   enemy: {fileID: 0}
   swordHitbox: {fileID: 1537952368870216596}
   exitPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
+  spriteRenderer: {fileID: 0}
+  polygonCollider: {fileID: 0}
 --- !u!95 &6267836393230244305
 Animator:
   serializedVersion: 5

@@ -7,11 +7,14 @@ public class PlayerCombatCapybara : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackDamage;
     [SerializeField] private float attackRange;
-    [SerializeField] private float attackCooldown = 1f; // Adjust as needed
-    private float nextAttackTime = 0f;
+    [SerializeField] private float comboCooldown = 1f;
+    [SerializeField] private float comboResetTime = 1f;
+    private int comboCount = 0;
+    private float lastAttackTime = 0f;
     private float lockedMovementTime = 0f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private GameObject enemy;
+
     private Rigidbody2D rb;
     private Animator animator;
     private Vector3 mousePosition;
@@ -40,13 +43,16 @@ public class PlayerCombatCapybara : MonoBehaviour
         }
 
         // Attacking
-        if(Input.GetMouseButton(0) && Time.time >= nextAttackTime) {
-            lockedMovementTime = Time.time + 0.5f;
-
-            PlayerAttack();
-            nextAttackTime = Time.time + 1f / attackCooldown;
+        if(Input.GetMouseButton(0)) {
+            StartCoroutine(PlayerCombo());
         }
-        
+
+        // Check if the player hasn't attacked for a while, reset the combo
+        if (Time.time - lastAttackTime >= comboResetTime) {
+            //Debug.Log("Combo Reset");
+            comboCount = 0;
+        }
+
     }
 
     void PlayerAttack() {
@@ -62,6 +68,24 @@ public class PlayerCombatCapybara : MonoBehaviour
                 Debug.Log("Hit!");
                 Vector2 knockbackDirection = CalculateKnockbackDirection(enemy);
                 enemy.GetComponent<EnemyEnum>().Damage(attackDamage, knockbackDirection);
+            }
+        }
+    }
+
+    private IEnumerator PlayerCombo() {
+        if(Time.time >= lockedMovementTime) {
+            lockedMovementTime = Time.time + 0.5f;
+
+            if(comboCount < 3) {
+                PlayerAttack();
+                comboCount++;
+                lastAttackTime = Time.time;
+                Debug.Log($"Combo Mark: {comboCount}");
+            }
+            else {
+                Debug.Log("Combo Break");
+                yield return new WaitForSecondsRealtime(comboCooldown);
+                comboCount = 0;
             }
         }
     }

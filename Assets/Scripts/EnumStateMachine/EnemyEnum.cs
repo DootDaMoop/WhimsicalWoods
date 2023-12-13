@@ -24,6 +24,9 @@ public class EnemyEnum : MonoBehaviour
     [SerializeField] private float nextAttackTime = 0f;
     [SerializeField] private float attackCooldown = 1f;
     public GameObject projectilePrefab;
+    public SpriteRenderer spriteRenderer;
+    public PolygonCollider2D polygonCollider;
+
 
     // Idle Variables
     [SerializeField] private float randomMovementRange = 5f;
@@ -45,6 +48,8 @@ public class EnemyEnum : MonoBehaviour
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        polygonCollider = GetComponent<PolygonCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         targetPos = GetRandomPointInCircle();
         isFacingRight = true;
@@ -52,6 +57,16 @@ public class EnemyEnum : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        // Movement Animations
+        float xInput = rb.velocity.x;
+        float yInput = rb.velocity.y;
+
+        animator.SetFloat("MoveX", xInput);
+        animator.SetFloat("MoveY", yInput);
+
+        Vector2[] spriteVertices = spriteRenderer.sprite.vertices;
+        polygonCollider.SetPath(0, spriteVertices);
+
         if(player != null) {
             if(PlayerDistance().magnitude <= aggroRadius) {
                 isAggro = true;
@@ -78,8 +93,9 @@ public class EnemyEnum : MonoBehaviour
         switch(currentState) {
             case EnemyState.Idle:
                 // Idle Logic
-                animator.SetBool("ChaseState", false);
-                animator.SetBool("AttackState", false);
+                animator.speed = 0.1f;
+                //animator.SetBool("ChaseState", false);
+                //animator.SetBool("AttackState", false);
 
                 if(isAggro) {
                     SetState(EnemyState.Chase);
@@ -101,9 +117,10 @@ public class EnemyEnum : MonoBehaviour
 
             case EnemyState.Chase:
                 // Chase Logic
+                animator.speed = 0.25f;
                 movementSpeed = 1.75f;
-                animator.SetBool("AttackState", false);
-                animator.SetBool("ChaseState",true);
+                //animator.SetBool("AttackState", false);
+                //animator.SetBool("ChaseState",true);
 
                 if(!isAggro) {
                     SetState(EnemyState.Idle);
@@ -120,9 +137,10 @@ public class EnemyEnum : MonoBehaviour
 
             case EnemyState.Attack:
                 // Attack Logic
+                animator.speed = 0.5f;
                 movementSpeed = 2.0f;
-                animator.SetBool("ChaseState", false);
-                animator.SetBool("AttackState", true);
+                //animator.SetBool("ChaseState", false);
+                //animator.SetBool("AttackState", true);
 
                 if(!isAttacking) {
                     SetState(EnemyState.Chase);
@@ -140,7 +158,18 @@ public class EnemyEnum : MonoBehaviour
                     }
                 }
                 else {
+
+                    if(animator.GetBool("Damaged")) {
+                        animator.speed = 1f;
+                    }
+                    else{
+                        animator.speed = 0f;
+                    }
+                    
                     MoveEnemy(Vector2.zero);
+                    animator.SetFloat("MoveX", (player.transform.position - transform.position).x);
+                    animator.SetFloat("MoveY", (player.transform.position - transform.position).y);
+
                     if(Time.time >= nextAttackTime) {
                         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
@@ -154,11 +183,10 @@ public class EnemyEnum : MonoBehaviour
                         nextAttackTime = Time.time + 5f / attackCooldown;
                     }
                 }
-                
-
                 break;
 
             case EnemyState.Death:
+                animator.speed = 1f;
                 MoveEnemy(Vector2.zero);
                 Death();
                 break;
@@ -174,10 +202,10 @@ public class EnemyEnum : MonoBehaviour
 
     public void MoveEnemy(Vector2 velocity) {
         rb.velocity = velocity;
-        CheckForLeftOrRightFacing(velocity);
+        //CheckForLeftOrRightFacing(velocity);
     }
 
-    public void CheckForLeftOrRightFacing(Vector2 velocity)
+    /*public void CheckForLeftOrRightFacing(Vector2 velocity)
     {
         if(isFacingRight && velocity.x < 0f) {
             Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
@@ -189,7 +217,7 @@ public class EnemyEnum : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotator);
             isFacingRight = !isFacingRight;
         }
-    }
+    }*/
 
     private Vector3 PlayerDistance() {
         return transform.position - player.transform.position;
@@ -209,19 +237,21 @@ public class EnemyEnum : MonoBehaviour
 
     public void Damage(float damageAmount, Vector2 knockbackDirection) {
         currentHealth -= damageAmount;
-        animator.SetTrigger("Damage");
+        animator.SetBool("Damaged", true);
         StartCoroutine(ApplyKnockback(knockbackDirection));
 
         if(currentHealth <= 0) {
+            animator.SetBool("Damaged", false);
             SetState(EnemyState.Death);
         }
     }
 
     public void Damage(float damageAmount) {
         currentHealth -= damageAmount;
-        animator.SetTrigger("Damage");
+        animator.SetBool("Damaged", true);
 
         if(currentHealth <= 0) {
+            animator.SetBool("Damaged", false);
             SetState(EnemyState.Death);
         }
     }
@@ -235,6 +265,8 @@ public class EnemyEnum : MonoBehaviour
             transform.position += (Vector3)knockbackDirection * (knockbackForce/duration) * Time.deltaTime;
             yield return null;
         }
+
+        animator.SetBool("Damaged", false);
     }
 
     public void Death() {
@@ -245,7 +277,7 @@ public class EnemyEnum : MonoBehaviour
         animator.SetBool("DeadState",true);
 
         // Verifies death animation is playing
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("slime_death")) {
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("death_animation")) {
             yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
             Destroy(this.gameObject);
         }
@@ -273,12 +305,12 @@ public class EnemyEnum : MonoBehaviour
     #endregion
 
     #region Testing
-    private void OnDrawGizmosSelected() {
+    /*private void OnDrawGizmosSelected() {
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(transform.position, 8f);
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, 3f);
-    }
+    }*/
     #endregion
 
 }

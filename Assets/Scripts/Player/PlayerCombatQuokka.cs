@@ -40,7 +40,7 @@ public class PlayerCombatQuokka : MonoBehaviour
 
         // Attacking
         if(Input.GetMouseButton(0) && Time.time >= nextAttackTime) {
-            //lockedMovementTime = Time.time + 0.5f;
+            lockedMovementTime = Time.time + 0.5f;
             PlayerShoot();
             nextAttackTime = Time.time + 1f / attackCooldown;
         }
