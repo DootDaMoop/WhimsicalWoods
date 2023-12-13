@@ -23,7 +23,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     private int currentLevel = 0;
     public static bool biomeComplete = false;
 
-     public GameObject[] characterPrefabs;
+    public GameObject[] characterPrefabs;
     // public GameObject playerPrefab;
     public GameObject exitDoorPrefab;
 
@@ -118,19 +118,22 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         Debug.Log("List Size: " + roomCenters.Count);
 
-        Vector2Int mostLowerLeft = exitPosition;
-        Vector2Int mostUpperRight = startPosition;
+        Vector2Int mostLowerLeft = roomCenters[0]; // Assume first element as starting point
+        Vector2Int mostUpperRight = roomCenters[0]; // Assume first element as starting point
+
+        // Vector2Int mostLowerLeft = exitPosition;
+        // Vector2Int mostUpperRight = startPosition;
 
         // Determine start and end rooms
         foreach (var center in roomCenters)
         {
             Debug.Log("List Element: " + center);
-            if (center.x < mostLowerLeft.x || center.y < mostLowerLeft.y || (center.x <= mostLowerLeft.x && center.y < mostLowerLeft.y))
+            if (center.x < mostLowerLeft.x || center.y < mostLowerLeft.y) // center.x < mostLowerLeft.x || center.y < mostLowerLeft.y || (center.x <= mostLowerLeft.x && center.y < mostLowerLeft.y)
             {
                 mostLowerLeft = center;
                 Debug.Log("Lower: " + mostLowerLeft);
             }
-            else if (center.x > mostUpperRight.x || center.y > mostLowerLeft.y || (center.x >= mostUpperRight.x && center.y > mostUpperRight.y))
+            else if (center.x > mostUpperRight.x || center.y > mostUpperRight.y) //else-if center.x > mostUpperRight.x || center.y > mostLowerLeft.y || (center.x >= mostUpperRight.x && center.y > mostUpperRight.y)
             {
                 mostUpperRight = center;
                 Debug.Log("Upper: " + mostUpperRight);
@@ -149,7 +152,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             // Generate the specified number of enemies around the center
             for (int i = 0; i < numberOfEnemies; i++)
             {
-                
+
                 // Variables to store the spawn position
                 Vector3 enemySpawnPosition = Vector3.zero;
                 bool positionFound = false;
