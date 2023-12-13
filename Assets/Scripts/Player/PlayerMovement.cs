@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject exitPrefab;
     public SpriteRenderer spriteRenderer;
     public PolygonCollider2D polygonCollider;
+    private Scene currentScene;
 
     private void Start()
     {
@@ -36,15 +37,19 @@ public class PlayerMovement : MonoBehaviour
         knockbackForce = 5f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         polygonCollider = GetComponent<PolygonCollider2D>();
+        currentScene = SceneManager.GetActiveScene();
     }
 
     private void FixedUpdate()
     {
+        if(!(currentScene.name == "CharacterSelection")) {
+            moveX = Input.GetAxis("Horizontal");
+            moveY = Input.GetAxis("Vertical");
+        }
+            mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         // Player Movement Input
-        moveX = Input.GetAxis("Horizontal");
-        moveY = Input.GetAxis("Vertical");
-        mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        
 
         // Calculate directions
         movement = new Vector2(moveX, moveY).normalized;
@@ -142,7 +147,13 @@ public class PlayerMovement : MonoBehaviour
 
         while(Time.time < startTime + duration) {
             transform.position += (Vector3)direction * (knockbackForce / duration) * Time.deltaTime;
-            enemy.GetComponent<EnemyEnum>().rb.velocity = Vector2.zero;
+            if(enemy.GetComponent<EnemyEnum>() != null) {
+                enemy.GetComponent<EnemyEnum>().rb.velocity = Vector2.zero;
+            }
+            else {
+                enemy.GetComponent<BossAI>().rb.velocity = Vector2.zero;
+            }
+            
             yield return null;
         }
     }

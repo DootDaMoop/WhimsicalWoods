@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 6752841617419479842}
-  attackDamage: 100
+  attackDamage: 50
   attackRange: 2
   comboCooldown: 1
   comboResetTime: 1

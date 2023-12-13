@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8569557812788761101}
   - component: {fileID: 568932632403659194}
-  - component: {fileID: 6955114052734587782}
   - component: {fileID: 4094789056478561226}
   - component: {fileID: 5540126172180410531}
   - component: {fileID: 2297999787842730620}
+  - component: {fileID: -3073427012349251395}
   m_Layer: 6
   m_Name: Arctic Fox
   m_TagString: Enemy
@@ -88,51 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6955114052734587782
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5027273632504267129}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00046934187, y: -0.031445183}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.13320616, y: 0.11067824}
-  m_EdgeRadius: 0
 --- !u!50 &4094789056478561226
 Rigidbody2D:
   serializedVersion: 4
@@ -200,9 +155,70 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: {fileID: 0}
   isFacingRight: 0
+  isRanged: 0
   aggroRadius: 8
   attackRadius: 3
   movementSpeed: 1.75
+  nextAttackTime: 0
+  attackCooldown: 1
+  projectilePrefab: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  healthPickUpPrefab: {fileID: 3200271299547460204, guid: 968f2b929ece4c440a1848b4204269a6, type: 3}
+  healthDropChance: 0.2
   randomMovementRange: 5
   randomMovementSpeed: 1
   knockbackForce: 0
+--- !u!60 &-3073427012349251395
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5027273632504267129}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.06, y: 0.06}
+      - {x: -0.089999996, y: 0.03}
+      - {x: -0.089999996, y: -0.06}
+      - {x: -0.07, y: -0.089999996}
+      - {x: 0.08, y: -0.089999996}
+      - {x: 0.089999996, y: -0.06}
+      - {x: 0.089999996, y: 0.03}
+      - {x: 0.049999997, y: 0.06}
+  m_UseDelaunayMesh: 0

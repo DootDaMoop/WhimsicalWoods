@@ -67,7 +67,13 @@ public class PlayerCombatCapybara : MonoBehaviour
             else{
                 Debug.Log("Hit!");
                 Vector2 knockbackDirection = CalculateKnockbackDirection(enemy);
-                enemy.GetComponent<EnemyEnum>().Damage(attackDamage, knockbackDirection);
+                if(enemy.GetComponent<EnemyEnum>() != null) {
+                    enemy.GetComponent<EnemyEnum>().Damage(attackDamage, knockbackDirection);
+                }
+                else { 
+                    enemy.GetComponent<BossAI>().Damage(attackDamage, knockbackDirection);
+                }
+                
             }
         }
     }

@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: -1609713519
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1783441113, guid: a50cf016dade4ec40a6890ae01a2982e, type: 3}
-  m_Color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+  m_Sprite: {fileID: 681520037, guid: 3f116921a99bd924db4c1611805e6bbf, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -164,6 +164,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   spriteRenderer: {fileID: 0}
   polygonCollider: {fileID: 0}
+  healthPickUpPrefab: {fileID: 3200271299547460204, guid: 968f2b929ece4c440a1848b4204269a6, type: 3}
+  healthDropChance: 0.2
   randomMovementRange: 5
   randomMovementSpeed: 1
   knockbackForce: 5
@@ -203,7 +205,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

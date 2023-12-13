@@ -200,9 +200,17 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: {fileID: 0}
   isFacingRight: 0
+  isRanged: 0
   aggroRadius: 8
   attackRadius: 3
   movementSpeed: 1.75
+  nextAttackTime: 0
+  attackCooldown: 1
+  projectilePrefab: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  healthPickUpPrefab: {fileID: 3200271299547460204, guid: 968f2b929ece4c440a1848b4204269a6, type: 3}
+  healthDropChance: 0.2
   randomMovementRange: 5
   randomMovementSpeed: 1
   knockbackForce: 0

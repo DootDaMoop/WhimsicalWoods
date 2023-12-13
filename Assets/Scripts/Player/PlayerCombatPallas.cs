@@ -7,7 +7,7 @@ public class PlayerCombatPallas : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackDamage;
     [SerializeField] private float attackRange;
-    [SerializeField] private float comboCooldown = 1f;
+    [SerializeField] private float comboCooldown = 2f;
     [SerializeField] private float comboResetTime = 1f;
     private int comboCount = 0;
     private float lastAttackTime = 0f;
@@ -67,7 +67,12 @@ public class PlayerCombatPallas : MonoBehaviour
             else{
                 Debug.Log("Hit!");
                 Vector2 knockbackDirection = CalculateKnockbackDirection(enemy);
-                enemy.GetComponent<EnemyEnum>().Damage(attackDamage, knockbackDirection);
+                if(enemy.GetComponent<EnemyEnum>() != null) {
+                    enemy.GetComponent<EnemyEnum>().Damage(attackDamage, knockbackDirection);
+                }
+                else { 
+                    enemy.GetComponent<BossAI>().Damage(attackDamage, knockbackDirection);
+                }
             }
         }
     }
@@ -76,7 +81,7 @@ public class PlayerCombatPallas : MonoBehaviour
         if(Time.time >= lockedMovementTime) {
             lockedMovementTime = Time.time + 0.5f;
 
-            if(comboCount < 3) {
+            if(comboCount < 2) {
                 PlayerAttack();
                 comboCount++;
                 lastAttackTime = Time.time;

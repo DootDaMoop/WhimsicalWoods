@@ -36,7 +36,13 @@ public class Projectile : MonoBehaviour
         }
         else if(other.gameObject.CompareTag("Enemy")) {
             Debug.Log("HIT");
-            other.gameObject.GetComponent<EnemyEnum>().Damage(projectileDamage);
+            if(other.gameObject.GetComponent<EnemyEnum>() != null) {
+                other.gameObject.GetComponent<EnemyEnum>().Damage(projectileDamage);
+            }
+            else {
+                other.gameObject.GetComponent<BossAI>().Damage(projectileDamage);
+            }
+            
             Destroy(gameObject);
         }
     }

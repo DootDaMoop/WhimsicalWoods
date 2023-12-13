@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2059841640202419605}
   - component: {fileID: 6389058501918583348}
-  - component: {fileID: 8361276084545326413}
   - component: {fileID: 260336011047990836}
+  - component: {fileID: -9153885825122598129}
   - component: {fileID: 941173816669015898}
+  - component: {fileID: 7675299149904318762}
   m_Layer: 6
   m_Name: Chugan the Chicken
   m_TagString: Enemy
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: -1609713519
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1783441113, guid: a50cf016dade4ec40a6890ae01a2982e, type: 3}
+  m_Sprite: {fileID: 376507262, guid: 8af13bdef70e7f945b8cb3f1efb44feb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,8 +88,86 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8361276084545326413
-BoxCollider2D:
+--- !u!50 &260336011047990836
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375645824460459604}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 15
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!114 &-9153885825122598129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375645824460459604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae1df54b73dcf9439ea7a61c76b66e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 300
+  currentHealth: 300
+  attackDamage: 25
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  player: {fileID: 0}
+  isFacingRight: 0
+  aggroRadius: 8
+  attackRadius: 3
+  movementSpeed: 1.75
+  nextAttackTime: 0
+  attackCooldown: 1
+  projectilePrefab: {fileID: 5665352364310876827, guid: 259cce2f14e9cdb4f92499b9bab6212b, type: 3}
+  spriteRenderer: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  randomMovementRange: 5
+  randomMovementSpeed: 1
+  knockbackForce: 0
+--- !u!95 &941173816669015898
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375645824460459604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c93887ce1acb7a44cb552636dc2be286, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &7675299149904318762
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,64 +198,25 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00046934187, y: -0.031445183}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.13320616, y: 0.11067824}
-  m_EdgeRadius: 0
---- !u!50 &260336011047990836
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375645824460459604}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 15
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!95 &941173816669015898
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375645824460459604}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd16a2a6498092c4daeb6161f0baad85, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.06, y: 0.24}
+      - {x: -0.17, y: 0.11}
+      - {x: -0.17, y: -0.08}
+      - {x: -0.16, y: -0.089999996}
+      - {x: -0.08, y: -0.19999999}
+      - {x: 0.12, y: -0.19999999}
+      - {x: 0.19, y: -0.07}
+      - {x: 0.19, y: 0.07}
+      - {x: 0.07, y: 0.24}
+  m_UseDelaunayMesh: 0

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8023638773320720974}
   - component: {fileID: 4777260290269886387}
-  - component: {fileID: 7773618078751320084}
   - component: {fileID: 7533966737671881817}
   - component: {fileID: 5193390091772513746}
   - component: {fileID: 5114861516058432039}
+  - component: {fileID: -8656371080652228799}
   m_Layer: 6
   m_Name: Jaguar
   m_TagString: Enemy
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: -1609713519
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1783441113, guid: a50cf016dade4ec40a6890ae01a2982e, type: 3}
-  m_Color: {r: 0.49056602, g: 0.1827599, b: 0, a: 1}
+  m_Sprite: {fileID: 1825252993, guid: dff404d3570102d49b7e29a392df0a15, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,51 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7773618078751320084
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3205689738011914591}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00046934187, y: -0.031445183}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.13320616, y: 0.11067824}
-  m_EdgeRadius: 0
 --- !u!50 &7533966737671881817
 Rigidbody2D:
   serializedVersion: 4
@@ -170,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 3205689738011914591}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd16a2a6498092c4daeb6161f0baad85, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5e69123e7b4365741bca6f325e149be5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -200,9 +155,70 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: {fileID: 0}
   isFacingRight: 0
+  isRanged: 0
   aggroRadius: 8
   attackRadius: 3
   movementSpeed: 1.75
+  nextAttackTime: 0
+  attackCooldown: 1
+  projectilePrefab: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  polygonCollider: {fileID: 0}
+  healthPickUpPrefab: {fileID: 3200271299547460204, guid: 968f2b929ece4c440a1848b4204269a6, type: 3}
+  healthDropChance: 0.2
   randomMovementRange: 5
   randomMovementSpeed: 1
   knockbackForce: 0
+--- !u!60 &-8656371080652228799
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205689738011914591}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.48, y: 0.48}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.06, y: 0.06}
+      - {x: -0.089999996, y: 0.03}
+      - {x: -0.089999996, y: -0.06}
+      - {x: -0.07, y: -0.089999996}
+      - {x: 0.08, y: -0.089999996}
+      - {x: 0.089999996, y: -0.06}
+      - {x: 0.089999996, y: 0.03}
+      - {x: 0.049999997, y: 0.06}
+  m_UseDelaunayMesh: 0
