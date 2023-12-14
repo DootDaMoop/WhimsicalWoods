@@ -274,7 +274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -286.21378, y: 202.90002}
+  m_AnchoredPosition: {x: -777.4138, y: 465}
   m_SizeDelta: {x: 215, y: 37.7781}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &202309566
@@ -586,7 +586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -389.7182, y: 202.00002}
+  m_AnchoredPosition: {x: -880.9182, y: 464.09998}
   m_SizeDelta: {x: 71.4895, y: 60.4973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &516899929
@@ -772,7 +772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -278.8, y: 202.9}
+  m_AnchoredPosition: {x: -770, y: 465}
   m_SizeDelta: {x: 189.0687, y: 26.6562}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1122849332
@@ -55773,7 +55773,7 @@ MonoBehaviour:
   exitDoorPrefab: {fileID: 5772906526287674625, guid: d3543f620cbd24faf8d8aed84b136472, type: 3}
   enemyPrefabs:
   - {fileID: 57277532467324757, guid: 195d75f0d975e4a34b599035b4d8efa1, type: 3}
-  - {fileID: 4221714211876272352, guid: c0b6ed4216bc440a1a73011047035427, type: 3}
+  - {fileID: 2331578299004049517, guid: c0b6ed4216bc440a1a73011047035427, type: 3}
   - {fileID: 3205689738011914591, guid: 0e6ec969bd51a44828f772362c9367e5, type: 3}
   exitPosition: {x: 140, y: 120}
 --- !u!4 &1725523736

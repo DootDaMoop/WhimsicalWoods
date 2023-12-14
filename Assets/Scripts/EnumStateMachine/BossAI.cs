@@ -7,7 +7,7 @@ public class BossAI : MonoBehaviour
     // Universal Variables
     private EnemyState currentState;
     [SerializeField] private float maxHealth = 100f;
-    public float currentHealth;
+    public int currentHealth;
     [SerializeField] private float attackDamage = 10f;
     public Rigidbody2D rb;
     public Animator animator;
@@ -25,6 +25,9 @@ public class BossAI : MonoBehaviour
     public GameObject projectilePrefab;
     public SpriteRenderer spriteRenderer;
     public PolygonCollider2D polygonCollider;
+    [SerializeField] private AudioSource attackSoundEffect;
+    [SerializeField] private AudioSource meleeSoundEffect;
+    [SerializeField] private AudioSource rangedSoundEffect;
 
 
     // Knockback Variables
@@ -38,7 +41,7 @@ public class BossAI : MonoBehaviour
 
     private void Start() {
         currentState = EnemyState.Chase;
-        currentHealth = maxHealth;
+        currentHealth = PlayerPrefs.GetInt("bossHealth");
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -61,6 +64,7 @@ public class BossAI : MonoBehaviour
         if(player != null) {
             if(PlayerDistance().magnitude <= attackRadius) {
                 isAttacking = true;
+                attackSoundEffect.Play();
             }
             else {
                 isAttacking = false;
@@ -179,7 +183,10 @@ public class BossAI : MonoBehaviour
     #region Damage and Death
 
     public void Damage(float damageAmount, Vector2 knockbackDirection) {
-        currentHealth -= damageAmount;
+        currentHealth = PlayerPrefs.GetInt("bossHealth");
+        currentHealth -= (int) damageAmount;
+        meleeSoundEffect.Play();
+        PlayerPrefs.SetInt("bossHealth", currentHealth);
         animator.SetBool("Damaged", true);
         StartCoroutine(ApplyKnockback(knockbackDirection));
 
@@ -190,7 +197,10 @@ public class BossAI : MonoBehaviour
     }
 
     public void Damage(float damageAmount) {
-        currentHealth -= damageAmount;
+        currentHealth = PlayerPrefs.GetInt("bossHealth");
+        currentHealth -= (int) damageAmount;
+        rangedSoundEffect.Play();
+        PlayerPrefs.SetInt("bossHealth", currentHealth);
         animator.SetBool("Damaged", true);
 
         if(currentHealth <= 0) {

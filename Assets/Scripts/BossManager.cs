@@ -26,5 +26,8 @@ public class BossManager : MonoBehaviour
         if (PlayerPrefs.GetInt("currentHealth") <= 0) {
             SceneManager.LoadScene("Lose", LoadSceneMode.Single);
         }
+        if (PlayerPrefs.GetInt("bossHealth") <= 0) {
+            SceneManager.LoadScene("Win", LoadSceneMode.Single);
+        }
     }
 }
