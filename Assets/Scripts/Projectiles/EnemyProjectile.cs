@@ -24,6 +24,7 @@ public class EnemyProjectile : MonoBehaviour
 
         while(Time.time < startTime + duration) {
             transform.position += (Vector3)direction * (projectileSpeed/duration) * Time.deltaTime;
+            transform.Rotate(Vector3.up * 180f * Time.deltaTime);
             yield return null;
         }
 

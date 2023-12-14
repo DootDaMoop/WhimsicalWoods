@@ -161,7 +161,7 @@ MonoBehaviour:
   movementSpeed: 1.75
   nextAttackTime: 0
   attackCooldown: 1
-  projectilePrefab: {fileID: 5665352364310876827, guid: 259cce2f14e9cdb4f92499b9bab6212b, type: 3}
+  projectilePrefab: {fileID: 6860515867009534182, guid: edf3a3eb946e1eb47accf41ab1518f3f, type: 3}
   spriteRenderer: {fileID: 0}
   polygonCollider: {fileID: 0}
   healthPickUpPrefab: {fileID: 3200271299547460204, guid: 968f2b929ece4c440a1848b4204269a6, type: 3}

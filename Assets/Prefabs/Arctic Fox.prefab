@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: -1609713519
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1783441113, guid: a50cf016dade4ec40a6890ae01a2982e, type: 3}
-  m_Color: {r: 0, g: 0, b: 0.6981132, a: 1}
+  m_Sprite: {fileID: 786270597, guid: 95f4d56db0b0bc34abd200a701c33599, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -125,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 5027273632504267129}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd16a2a6498092c4daeb6161f0baad85, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ada3324e80b8154bb2c40352b9f9cbe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -155,13 +155,13 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: {fileID: 0}
   isFacingRight: 0
-  isRanged: 0
+  isRanged: 1
   aggroRadius: 8
   attackRadius: 3
   movementSpeed: 1.75
   nextAttackTime: 0
   attackCooldown: 1
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 3268644027645924236, guid: 8c0893a42f40eee4790fef630a5f2833, type: 3}
   spriteRenderer: {fileID: 0}
   polygonCollider: {fileID: 0}
   healthPickUpPrefab: {fileID: 3200271299547460204, guid: 968f2b929ece4c440a1848b4204269a6, type: 3}
@@ -205,7 +205,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
