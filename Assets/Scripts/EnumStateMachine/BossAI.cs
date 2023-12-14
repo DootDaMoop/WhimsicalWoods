@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyEnum : MonoBehaviour
+public class BossAI : MonoBehaviour
 {
     // Universal Variables
     private EnemyState currentState;
@@ -12,49 +12,38 @@ public class EnemyEnum : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     public GameObject player;
-    public bool isFacingRight;
-    public bool isRanged = false;
-    public bool collisionHit {get; set;} // Collision with wall
-    public bool playerHit {get; set;} // Collision with Player
+    public bool collisionHit {get; set;} =false; // Collision with wall
+    public bool playerHit {get; set;} = false; // Collision with Player
     public bool isAggro {get; set;}
     public bool isAttacking {get; set;}
-    public float aggroRadius = 8f;
-    public float attackRadius = 3f;
+    public float aggroRadius = 10f;
+    public float attackRadius = 9f;
     public float movementSpeed = 1.75f;
+    public bool coroutineRunning {get; set;} = false;
     [SerializeField] private float nextAttackTime = 0f;
     [SerializeField] private float attackCooldown = 1f;
     public GameObject projectilePrefab;
     public SpriteRenderer spriteRenderer;
     public PolygonCollider2D polygonCollider;
-    [SerializeField] private GameObject healthPickUpPrefab;
-    [SerializeField] private float healthDropChance = 0.2f;
 
-
-    // Idle Variables
-    [SerializeField] private float randomMovementRange = 5f;
-    [SerializeField] private float randomMovementSpeed = 1f;
-    private Vector3 targetPos;
 
     // Knockback Variables
     [SerializeField] private float knockbackForce;
 
     public enum EnemyState {
-        Idle,
         Chase,
         Attack,
         Death
     }
 
     private void Start() {
-        currentState = EnemyState.Idle;
+        currentState = EnemyState.Chase;
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         polygonCollider = GetComponent<PolygonCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-        targetPos = GetRandomPointInCircle();
-        isFacingRight = true;
         knockbackForce = 5f;
     }
 
@@ -70,13 +59,6 @@ public class EnemyEnum : MonoBehaviour
         polygonCollider.SetPath(0, spriteVertices);
 
         if(player != null) {
-            if(PlayerDistance().magnitude <= aggroRadius) {
-                isAggro = true;
-            }
-            else {
-                isAggro = false;
-            }
-
             if(PlayerDistance().magnitude <= attackRadius) {
                 isAttacking = true;
             }
@@ -89,33 +71,10 @@ public class EnemyEnum : MonoBehaviour
         }
 
         if(player.GetComponent<Animator>().GetBool("isDead")) {
-            SetState(EnemyState.Idle);
+            SetState(EnemyState.Chase);
         }
 
         switch(currentState) {
-            case EnemyState.Idle:
-                // Idle Logic
-                animator.speed = 0.1f;
-                //animator.SetBool("ChaseState", false);
-                //animator.SetBool("AttackState", false);
-
-                if(isAggro) {
-                    SetState(EnemyState.Chase);
-                }
-
-                if(collisionHit) {
-                    targetPos = GetRandomPointInCircle();
-                    collisionHit = false;
-                }
-
-                // Wanders around randomly when Idling
-                Vector3 direction = (targetPos - transform.position).normalized;
-                MoveEnemy(direction * randomMovementSpeed);
-                if((transform.position - targetPos).sqrMagnitude < 0.01f) {
-                    targetPos = GetRandomPointInCircle();
-                }
-
-                break;
 
             case EnemyState.Chase:
                 // Chase Logic
@@ -123,10 +82,6 @@ public class EnemyEnum : MonoBehaviour
                 movementSpeed = 1.75f;
                 //animator.SetBool("AttackState", false);
                 //animator.SetBool("ChaseState",true);
-
-                if(!isAggro) {
-                    SetState(EnemyState.Idle);
-                }
 
                 if(isAttacking) {
                     SetState(EnemyState.Attack);
@@ -144,46 +99,40 @@ public class EnemyEnum : MonoBehaviour
                 //animator.SetBool("ChaseState", false);
                 //animator.SetBool("AttackState", true);
 
+                if(playerHit) {
+                    Vector2 knockbackDirection = (player.transform.position - transform.position).normalized;
+                    player.GetComponent<PlayerMovement>().PlayerKnockback(knockbackDirection);
+                    player.GetComponent<PlayerMovement>().TakeDamage(attackDamage); 
+                    playerHit = false;
+                }
+
                 if(!isAttacking) {
                     SetState(EnemyState.Chase);
                 }
 
-                if(!isRanged) {
-                    moveDirection = (player.transform.position - transform.position).normalized;
-                    MoveEnemy(moveDirection * movementSpeed);
-                    
-                    if(playerHit) {
-                        Vector2 knockbackDirection = (player.transform.position - transform.position).normalized;
-                        player.GetComponent<PlayerMovement>().PlayerKnockback(knockbackDirection);
-                        player.GetComponent<PlayerMovement>().TakeDamage(attackDamage); 
-                        playerHit = false;
-                    }
+                moveDirection = (player.transform.position - transform.position).normalized;
+                MoveEnemy(moveDirection * movementSpeed);
+                
+
+                if(animator.GetBool("Damaged")) {
+                    animator.speed = 1f;
                 }
-                else {
+                else{
+                    animator.speed = 0f;
+                }
+                
+                if(Time.time >= nextAttackTime) {
+                    // Projectile Direction
+                    Vector2 shootDirection = (player.transform.position - transform.position).normalized;
 
-                    if(animator.GetBool("Damaged")) {
-                        animator.speed = 1f;
+                    // Projectile Creation
+                    GameObject projectile = Instantiate(projectilePrefab, transform.position + (Vector3)shootDirection, Quaternion.identity);
+
+                    // Shooting
+                    if(projectile != null) {
+                        projectile.GetComponent<EnemyProjectile>().Move(shootDirection);
                     }
-                    else{
-                        animator.speed = 0f;
-                    }
-                    
-                    MoveEnemy(Vector2.zero);
-                    animator.SetFloat("MoveX", (player.transform.position - transform.position).x);
-                    animator.SetFloat("MoveY", (player.transform.position - transform.position).y);
-
-                    if(Time.time >= nextAttackTime) {
-                        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-
-                        //Bullet Direction
-                        Vector2 shootDirection = (player.transform.position - transform.position).normalized;
-
-                        // Shooting
-                        if(projectile != null) {
-                            projectile.GetComponent<EnemyProjectile>().Move(shootDirection);
-                        }
-                        nextAttackTime = Time.time + 5f / attackCooldown;
-                    }
+                    nextAttackTime = Time.time + 0.8f;
                 }
                 break;
 
@@ -227,14 +176,6 @@ public class EnemyEnum : MonoBehaviour
 
     #endregion
 
-    #region Idle State Functions
-
-    private Vector3 GetRandomPointInCircle() {
-        return transform.position + (Vector3)UnityEngine.Random.insideUnitCircle * randomMovementRange;
-    }
-
-    #endregion
-
     #region Damage and Death
 
     public void Damage(float damageAmount, Vector2 knockbackDirection) {
@@ -259,6 +200,7 @@ public class EnemyEnum : MonoBehaviour
     }
 
     private IEnumerator ApplyKnockback(Vector2 knockbackDirection) {
+        coroutineRunning = true;
         float duration = 1f;
         float startTime = Time.time;
 
@@ -269,6 +211,7 @@ public class EnemyEnum : MonoBehaviour
         }
 
         animator.SetBool("Damaged", false);
+        coroutineRunning = false;
     }
 
     public void Death() {
@@ -281,12 +224,6 @@ public class EnemyEnum : MonoBehaviour
         // Verifies death animation is playing
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("death_animation")) {
             yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorStateInfo(0).length);
-
-            // Dropping Health before Death
-            if(Random.value <= healthDropChance) {
-                Instantiate(healthPickUpPrefab, transform.position, Quaternion.identity);
-            }
-
             Destroy(this.gameObject);
         }
         // if not, wait for current animation to end and recurse Death()
@@ -313,12 +250,11 @@ public class EnemyEnum : MonoBehaviour
     #endregion
 
     #region Testing
-    /*private void OnDrawGizmosSelected() {
+    private void OnDrawGizmosSelected() {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(transform.position, 8f);
+        Gizmos.DrawSphere(transform.position, aggroRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 3f);
-    }*/
+        Gizmos.DrawSphere(transform.position, attackRadius);
+    }
     #endregion
-
 }
