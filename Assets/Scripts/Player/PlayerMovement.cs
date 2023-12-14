@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     public PolygonCollider2D polygonCollider;
     private Scene currentScene;
 
+    [SerializeField] private AudioSource damageSoundEffect;
+
     private void Start()
     {
         enemy = GameObject.FindGameObjectWithTag("Enemy");
@@ -128,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
         // currentHealth -= damageAmount;
         currentHealth = PlayerPrefs.GetInt("currentHealth");
         currentHealth -= (int)damageAmount;
+        damageSoundEffect.Play();
         PlayerPrefs.SetInt("currentHealth", currentHealth);
         Debug.Log($"Current Health: {currentHealth}");
 
