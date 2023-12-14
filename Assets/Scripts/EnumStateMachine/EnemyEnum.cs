@@ -28,6 +28,9 @@ public class EnemyEnum : MonoBehaviour
     public PolygonCollider2D polygonCollider;
     [SerializeField] private GameObject healthPickUpPrefab;
     [SerializeField] private float healthDropChance = 0.2f;
+    [SerializeField] private AudioSource attackSoundEffect;
+    [SerializeField] private AudioSource meleeSoundEffect;
+    [SerializeField] private AudioSource rangedSoundEffect;
 
 
     // Idle Variables
@@ -79,6 +82,7 @@ public class EnemyEnum : MonoBehaviour
 
             if(PlayerDistance().magnitude <= attackRadius) {
                 isAttacking = true;
+                attackSoundEffect.Play();
             }
             else {
                 isAttacking = false;
@@ -238,6 +242,7 @@ public class EnemyEnum : MonoBehaviour
     #region Damage and Death
 
     public void Damage(float damageAmount, Vector2 knockbackDirection) {
+        meleeSoundEffect.Play();
         currentHealth -= damageAmount;
         animator.SetBool("Damaged", true);
         StartCoroutine(ApplyKnockback(knockbackDirection));
@@ -249,6 +254,7 @@ public class EnemyEnum : MonoBehaviour
     }
 
     public void Damage(float damageAmount) {
+        rangedSoundEffect.Play();
         currentHealth -= damageAmount;
         animator.SetBool("Damaged", true);
 

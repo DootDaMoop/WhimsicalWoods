@@ -20,6 +20,8 @@ public class PlayerCombatPallas : MonoBehaviour
     private Vector3 mousePosition;
     private Vector2 mouseDirection;
 
+    [SerializeField] private AudioSource attackSoundEffect;
+
     private void Start() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +46,7 @@ public class PlayerCombatPallas : MonoBehaviour
 
         // Attacking
         if(Input.GetMouseButton(0)) {
+            attackSoundEffect.Play();
             StartCoroutine(PlayerCombo());
         }
 

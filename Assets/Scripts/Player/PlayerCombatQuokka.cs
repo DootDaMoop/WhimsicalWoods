@@ -16,6 +16,8 @@ public class PlayerCombatQuokka : MonoBehaviour
     private Vector3 mousePosition;
     private Vector2 mouseDirection;
 
+    [SerializeField] private AudioSource attackSoundEffect;
+
     private void Start() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -41,6 +43,7 @@ public class PlayerCombatQuokka : MonoBehaviour
         // Attacking
         if(Input.GetMouseButton(0) && Time.time >= nextAttackTime) {
             lockedMovementTime = Time.time + 0.5f;
+            attackSoundEffect.Play();
             PlayerShoot();
             nextAttackTime = Time.time + 1f / attackCooldown;
         }
