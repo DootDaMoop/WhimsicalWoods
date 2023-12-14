@@ -754,9 +754,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: The Whimsical Woods is in turmoil. A mischievous animal has stolen the
-    fabled Fountain of Harmony, causing chaos in the once-peaceful world. As the
-    chosen hero, it's your quest to retrieve the fountain, restore harmony, and bring
-    a smile back to the Whimsical Woods.
+    fabled Acorn of Harmony, causing chaos in the once-peaceful world. As the chosen
+    hero, it's your quest to retrieve the fountain, restore harmony, and bring a
+    smile back to the Whimsical Woods.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_text: "\u2022 Press the up arrow key to move forward.\n\u2022 Press the down
     arrow key to move backward.\n\u2022 Press the right and left arroow keys to move
     right and left.\n\u2022 Click on enemies to attack them.\n\u2022 Proceed to the
-    next level by collecting the golden chalice in each dungeon level."
+    next level by collecting the acorn in each dungeon level."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
